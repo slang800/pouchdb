@@ -5,7 +5,7 @@
 var fs = require('fs');
 
 var http_server = require('http-server');
-var execSync = require('exec-sync');
+var execSync = require('sync-exec');
 var mkdirp = require('mkdirp');
 var watchGlob = require('watch-glob');
 var replace = require('replace');
@@ -13,7 +13,7 @@ var replace = require('replace');
 var POUCHDB_CSS = __dirname + '/../docs/static/css/pouchdb.css';
 var POUCHDB_LESS = __dirname + '/../docs/static/less/pouchdb/pouchdb.less';
 
-if (!execSync('gem list jekyll -i')) {
+if (execSync('gem list jekyll -i') !== 0) {
   console.log('Install Jekyll');
   process.exit(1);
 }

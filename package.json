@@ -64,7 +64,7 @@
     "glob": "~3.2.9",
     "watch-glob": "~0.1.1",
     "mkdirp": "~0.4.2",
-    "exec-sync": "~0.1.6",
+    "sync-exec": "^0.5.0",
     "ua-parser-js": "^0.6.2",
     "chai": "^1.9.1",
     "mocha": "^1.18.2",
