@@ -13,18 +13,18 @@ function codeWrap(){
   var codeGroups =
     $('[data-code-id]')
       .get()
-      .map(function(div){
+      .map(function (div){
           return div.attributes["data-code-id"].value
       })
-      .filter(function(item, index, inputArray){
+      .filter(function (item, index, inputArray){
           return inputArray.indexOf(item) == index;
       })
-      .forEach(function(id){
+      .forEach(function (id){
         var $code = $("[data-code-id='" + id + "']");
 
         var paneHeight = 0;
 
-        var paneHtml = $code.get().map(function(div){
+        var paneHtml = $code.get().map(function (div){
           if(div.clientHeight > paneHeight){
             paneHeight = div.clientHeight;
           }
@@ -47,7 +47,7 @@ function codeWrap(){
         $('[data-code-hide]').addClass('hide');
       });
 
-  $('[data-code-tablist] [href]').on('click', function(e){
+  $('[data-code-tablist] [href]').on('click', function (e){
     var href = $(this).attr('href');
 
     setAll(href.replace('#', ''));

@@ -10,7 +10,7 @@ Get attachment data.
 
 {% include code/start.html id="get_att1" type="callback" %}
 {% highlight js %}
-db.getAttachment('doc', 'att.txt', function(err, res) {
+db.getAttachment('doc', 'att.txt', function (err, res) {
   if (err) { return console.log(err); }
   // handle result
 });

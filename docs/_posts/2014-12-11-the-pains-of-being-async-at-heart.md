@@ -15,7 +15,7 @@ This is the 101 of testing async code but it is the foundation for almost every 
 
 ```js
 db.put({_id: 'doc', foo: 'bar'});
-db.get('doc').then(function(doc) {
+db.get('doc').then(function (doc) {
   assert.equal(doc.foo, 'bar');
 });
 ```
@@ -23,9 +23,9 @@ db.get('doc').then(function(doc) {
 While this test may pass (although unlikely) it relies on a broken assumption that the write behind `.put` completes before the read behind `.get`. The proper way to test this is to wait until the `.put` is complete:
 
 ```js
-db.put({_id: 'doc', foo: 'bar'}).then(function() {
+db.put({_id: 'doc', foo: 'bar'}).then(function () {
   return db.get('doc');
-}).then(function(doc) {
+}).then(function (doc) {
   assert.equal(doc.foo, 'bar');
 });
 ```
@@ -37,9 +37,9 @@ As a side note [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/) 
 ```js
 // Test that a local write gets synced to remote database
 localDB.sync(remoteDB, {live: true});
-localDB.put({_id: 'doc', foo: 'bar'}).then(function() {
-  setTimeout(function() {
-    remoteDB.get('doc').then(function(doc) {
+localDB.put({_id: 'doc', foo: 'bar'}).then(function () {
+  setTimeout(function () {
+    remoteDB.get('doc').then(function (doc) {
       assert.equal(doc.foo, 'bar');
     });
   }, 1000);
@@ -50,7 +50,7 @@ The main issue with `setTimeout` is that nothing is guaranteed to complete befor
 
 ```js
 var changes = remoteDB.changes({live: true, include_docs: true});
-changes.on('change', function(change) {
+changes.on('change', function (change) {
   assert.equal(change.doc.foo, 'bar');
   done();
 });
@@ -69,9 +69,9 @@ I have found one use case where `setTimeout` is useful and that is to "prove a n
 // Test we only receive one change event for a write
 var numChanges = 0;
 var changes = db.changes({live: true, include_docs: true});
-changes.on('change', function(change) {
+changes.on('change', function (change) {
   numChanges++;
-  setTimeout(function() {
+  setTimeout(function () {
     assert.equal(numChanges, 1);
     done();
   }, 500);
@@ -86,7 +86,7 @@ This has been a very tricky issue in PouchDB. You want to make sure that when yo
 
 ```js
 var changes = db.changes({live: true, include_docs: true});
-changes.on('change', function(change) {
+changes.on('change', function (change) {
   assert.equal(change.doc.foo, 'bar');
   changes.cancel();
   done();
@@ -101,7 +101,7 @@ In PouchDB we fix this with:
 
 ```js
 var changes = db.changes({live: true, include_docs: true});
-changes.on('change', function(change) {
+changes.on('change', function (change) {
   assert.equal(change.doc.foo, 'bar');
   changes.cancel();
 });

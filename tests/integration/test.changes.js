@@ -1576,7 +1576,7 @@ adapters.forEach(function (adapter) {
       if (testUtils.isCouchMaster()) {
         return true;
       }
-      
+
       var db = new PouchDB(dbs.name);
       var tree = [
         [
@@ -2287,7 +2287,7 @@ adapters.forEach(function (adapter) {
               var rev2 = info.rev;
               return PouchDB.replicate(localdb, remotedb).then(function (done) {
                 // update remote once, local twice, then replicate from
-                // remote to local so the remote losing conflict is later in 
+                // remote to local so the remote losing conflict is later in
                 // the tree
                 return localdb.put({
                   _id: '3',

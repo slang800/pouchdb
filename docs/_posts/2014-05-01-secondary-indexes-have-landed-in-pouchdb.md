@@ -198,7 +198,7 @@ var designDoc = {
   _id: '_design/my_index',
   views: {
     'my_index': {
-      map: function(doc) {
+      map: function (doc) {
         emit(doc.name);
       }.toString()
     }
@@ -220,7 +220,7 @@ pouch.put(designDoc).then(function (info) {
 &hellip; and then it will be available for querying using the name `'my_index'`:
 
 ```js
-pouch.query('my_index').then(function(result) {
+pouch.query('my_index').then(function (result) {
  // do something with result
 });
 ```

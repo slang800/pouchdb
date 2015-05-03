@@ -17,7 +17,7 @@ For details, see the [CouchDB documentation on attachments](https://wiki.apache.
 {% include code/start.html id="attach1" type="callback" %}
 {% highlight js %}
 var attachment = new Blob(['Is there life on Mars?']);
-db.putAttachment('doc', 'att.txt', attachment, 'text/plain', function(err, res) {
+db.putAttachment('doc', 'att.txt', attachment, 'text/plain', function (err, res) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -63,7 +63,7 @@ If you supply a string instead of a `Blob`/`Buffer`, then it will be assumed to 
 var attachment = 
         "TGVnZW5kYXJ5IGhlYXJ0cywgdGVhciB1cyBhbGwgYXBhcnQKTWFrZS" +
         "BvdXIgZW1vdGlvbnMgYmxlZWQsIGNyeWluZyBvdXQgaW4gbmVlZA==";
-db.putAttachment('doc', 'att.txt', attachment, 'text/plain', function(err, res) {
+db.putAttachment('doc', 'att.txt', attachment, 'text/plain', function (err, res) {
   if (err) { return console.log(err); }
   // handle result
 });

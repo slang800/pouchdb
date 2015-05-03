@@ -64,7 +64,7 @@ adapters.forEach(function (adapters) {
       }
       // CSG will send a change event when just the ACL changed
       if (testUtils.isSyncGateway()) {
-        changes = changes.filter(function(change){
+        changes = changes.filter(function (change){
           return change.id !== "_user/";
         });
       }
@@ -73,10 +73,10 @@ adapters.forEach(function (adapters) {
 
     function verifyInfo(info, expected) {
       if (!testUtils.isCouchMaster()) {
-        if (typeof info.doc_count === 'undefined') { 
+        if (typeof info.doc_count === 'undefined') {
           // info is from Sync Gateway, which allocates an extra seqnum
           // for user access control purposes.
-          info.update_seq.should.be.within(expected.update_seq, 
+          info.update_seq.should.be.within(expected.update_seq,
             expected.update_seq + 1, 'update_seq');
         } else {
           info.update_seq.should.equal(expected.update_seq, 'update_seq');
@@ -272,7 +272,7 @@ adapters.forEach(function (adapters) {
       if (testUtils.isCouchMaster()) {
         return true;
       }
-      var db =  new PouchDB(dbs.name);
+      var db = new PouchDB(dbs.name);
       var remote = new PouchDB(dbs.remote);
       var rev;
 
@@ -309,7 +309,7 @@ adapters.forEach(function (adapters) {
         return db.allDocs({keys: ['foo']});
       }).then(function (res) {
         if (testUtils.isSyncGateway() && !res.rows[0].value) {
-          return remote.get('foo', {open_revs:'all'}).then(function(doc){
+          return remote.get('foo', {open_revs:'all'}).then(function (doc){
             return db.put({_id: 'foo', _rev: doc[0].ok._rev});
           });
         } else {
@@ -329,7 +329,7 @@ adapters.forEach(function (adapters) {
       var numRevs = 200; // repro "url too long" error with open_revs
       var docs = [];
       for (var i = 0; i < numRevs; i++) {
-        var rev =  '1-' + PouchDB.utils.uuid(32, 16).toLowerCase();
+        var rev = '1-' + PouchDB.utils.uuid(32, 16).toLowerCase();
         docs.push({_id: 'doc', _rev: rev});
       }
 
@@ -3004,7 +3004,7 @@ adapters.forEach(function (adapters) {
                   change.seq.should.equal(info.update_seq);
                   changes.cancel();
                 },
-                complete: function() {
+                complete: function () {
                   remote.info(function (err, info) {
                     var rchanges = remote.changes({
                       descending: true,
@@ -3014,7 +3014,7 @@ adapters.forEach(function (adapters) {
                         change.seq.should.equal(info.update_seq);
                         rchanges.cancel();
                       },
-                      complete: function() {
+                      complete: function () {
                         done();
                       }
                     });
@@ -3096,7 +3096,7 @@ adapters.forEach(function (adapters) {
         ++active;
       });
 
-      rep.on('complete', function() {
+      rep.on('complete', function () {
         active.should.equal(4);
         paused.should.be.at.least(3);
         done();
@@ -3147,7 +3147,7 @@ adapters.forEach(function (adapters) {
         ++numChanges;
       });
 
-      rep.on('complete', function() {
+      rep.on('complete', function () {
         active.should.equal(2);
         paused.should.equal(2);
         numChanges.should.equal(2);
@@ -3568,7 +3568,7 @@ adapters.forEach(function (adapters) {
           return db.bulkDocs({docs: docs});
         }).then(function () {
           var replication = db.replicate.to(dbs.remote);
-          replication.on('denied', function(error) {
+          replication.on('denied', function (error) {
             deniedErrors.push(error);
           });
           return replication;
@@ -3763,18 +3763,18 @@ adapters.forEach(function (adapters) {
       });
     });
 
-    it('#3270 triggers "change" events with .docs property', function(done) {
+    it('#3270 triggers "change" events with .docs property', function (done) {
       var replicatedDocs = [];
       var db = new PouchDB(dbs.name);
       db.bulkDocs({ docs: docs }, {})
-      .then(function(results) {
+      .then(function (results) {
         var replication = db.replicate.to(dbs.remote);
-        replication.on('change', function(change) {
+        replication.on('change', function (change) {
           replicatedDocs = replicatedDocs.concat(change.docs);
         });
         return replication;
       })
-      .then(function() {
+      .then(function () {
         replicatedDocs.sort(function (a, b) {
           return a._id > b._id ? 1 : -1;
         });
@@ -3812,7 +3812,7 @@ adapters.forEach(function (adapters) {
       });
     });
 
-    it("#3578 replication with a ddoc filter w/ _deleted=true", function() {
+    it("#3578 replication with a ddoc filter w/ _deleted=true", function () {
       var db = new PouchDB(dbs.name);
       var remote = new PouchDB(dbs.remote);
 
@@ -3829,13 +3829,13 @@ adapters.forEach(function (adapters) {
         {_id: 'c'}
       ]).then(function () {
         return remote.replicate.to(db, {filter: 'myddoc/myfilter'});
-      }).then(function() {
+      }).then(function () {
         return db.allDocs();
       }).then(function (res) {
         res.rows.should.have.length(2);
       }).then(function () {
         return remote.get('a');
-      }).then(function(doc) {
+      }).then(function (doc) {
         doc._deleted = true;
         return remote.put(doc);
       }).then(function () {
@@ -3847,7 +3847,7 @@ adapters.forEach(function (adapters) {
       });
     });
 
-    it("#3578 replication with a ddoc filter w/ remove()", function() {
+    it("#3578 replication with a ddoc filter w/ remove()", function () {
       var db = new PouchDB(dbs.name);
       var remote = new PouchDB(dbs.remote);
 
@@ -3864,13 +3864,13 @@ adapters.forEach(function (adapters) {
         {_id: 'c'}
       ]).then(function () {
         return remote.replicate.to(db, {filter: 'myddoc/myfilter'});
-      }).then(function() {
+      }).then(function () {
         return db.allDocs();
       }).then(function (res) {
         res.rows.should.have.length(2);
-      }).then(function(){
+      }).then(function (){
         return remote.get('a');
-      }).then(function(doc) {
+      }).then(function (doc) {
         return remote.remove(doc);
       }).then(function () {
         return remote.replicate.to(db, {filter: 'myddoc/myfilter'});

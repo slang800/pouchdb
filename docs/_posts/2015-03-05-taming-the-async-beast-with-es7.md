@@ -290,7 +290,7 @@ let docs = [{}, {}, {}];
 let promises = docs.map((doc) => db.post(doc));
 
 // WARNING: this doesn't work
-let results = promises.map(async function(promise) {
+let results = promises.map(async function (promise) {
   return await promise;
 });
 

@@ -17,9 +17,9 @@ Deletes the document. `doc` is required to be a document with at least an `_id` 
 
 {% include code/start.html id="delete_doc" type="callback" %}
 {% highlight js %}
-db.get('mydoc', function(err, doc) {
+db.get('mydoc', function (err, doc) {
   if (err) { return console.log(err); }
-  db.remove(doc, function(err, response) {
+  db.remove(doc, function (err, response) {
     if (err) { return console.log(err); }
     // handle response
   });
@@ -28,7 +28,7 @@ db.get('mydoc', function(err, doc) {
 {% include code/end.html %}
 {% include code/start.html id="delete_doc" type="promise" %}
 {% highlight js %}
-db.get('mydoc').then(function(doc) {
+db.get('mydoc').then(function (doc) {
   return db.remove(doc);
 }).then(function (result) {
   // handle result
@@ -52,9 +52,9 @@ You can also delete a document by just providing an `id` and `rev`:
 
 {% include code/start.html id="delete_doc3" type="callback" %}
 {% highlight js %}
-db.get('mydoc', function(err, doc) {
+db.get('mydoc', function (err, doc) {
   if (err) { return console.log(err); }
-  db.remove(doc._id, doc._rev, function(err, response) {
+  db.remove(doc._id, doc._rev, function (err, response) {
     if (err) { return console.log(err); }
     // handle response
   });
@@ -63,7 +63,7 @@ db.get('mydoc', function(err, doc) {
 {% include code/end.html %}
 {% include code/start.html id="delete_doc3" type="promise" %}
 {% highlight js %}
-db.get('mydoc').then(function(doc) {
+db.get('mydoc').then(function (doc) {
   return db.remove(doc._id, doc._rev);
 }).then(function (result) {
   // handle result
@@ -77,10 +77,10 @@ You can also delete a document by using `put()` with `{_deleted: true}`:
 
 {% include code/start.html id="delete_doc2" type="callback" %}
 {% highlight js %}
-db.get('mydoc', function(err, doc) {
+db.get('mydoc', function (err, doc) {
   if (err) { return console.log(err); }
   doc._deleted = true;
-  db.put(doc, function(err, response) {
+  db.put(doc, function (err, response) {
     if (err) { return console.log(err); }
     // handle response
   });
@@ -89,7 +89,7 @@ db.get('mydoc', function(err, doc) {
 {% include code/end.html %}
 {% include code/start.html id="delete_doc2" type="promise" %}
 {% highlight js %}
-db.get('mydoc').then(function(doc) {
+db.get('mydoc').then(function (doc) {
   doc._deleted = true;
   return db.put(doc);
 }).then(function (result) {

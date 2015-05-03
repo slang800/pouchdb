@@ -35,7 +35,7 @@ All options default to `false` unless otherwise specified.
 db.allDocs({
   include_docs: true, 
   attachments: true
-}, function(err, response) {
+}, function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -97,7 +97,7 @@ db.allDocs({
   attachments: true,
   startkey: 'bar',
   endkey: 'quux'
-}, function(err, response) {
+}, function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -131,7 +131,7 @@ db.allDocs({
   attachments: true,
   startkey: 'foo',
   endkey: 'foo\uffff'
-}, function(err, response) {
+}, function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });

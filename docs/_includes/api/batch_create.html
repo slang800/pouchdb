@@ -17,7 +17,7 @@ Put some new docs, providing the `_id`s:
 db.bulkDocs([
   {title : 'Lisa Says', _id: 'doc1'},
   {title : 'Space Oddity', _id: 'doc2'}
-], function(err, response) {
+], function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -43,7 +43,7 @@ Post some new docs and auto-generate the `_id`s:
 db.bulkDocs([
   {title : 'Lisa Says'},
   {title : 'Space Oddity'}
-], function(err, response) {
+], function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -115,7 +115,7 @@ db.bulkDocs([
     _id    : "doc2",
     _rev   : "1-7b80fc50b6af7a905f368670429a757e"
   }
-], function(err, response) {
+], function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -161,7 +161,7 @@ db.bulkDocs([
     _id      : "doc2",
     _rev     : "1-7b80fc50b6af7a905f368670429a757e"
   }
-], function(err, response) {
+], function (err, response) {
   if (err) { return console.log(err); }
   // handle result
 });

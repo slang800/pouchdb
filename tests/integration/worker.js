@@ -38,7 +38,7 @@ function allDocs(name) {
           content_type: ''
         }
       }
-    }, function(err, doc) {
+    }, function (err, doc) {
       db.get(doc.id, function (err, doc) {
         if (err) {
           throw err;

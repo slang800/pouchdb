@@ -65,7 +65,7 @@ function bundle(callback) {
 }
 
 function bundlePerfTests(callback) {
-   
+
   b.bundle().pipe(fs.createWriteStream(performanceBundle))
   .on('finish', function () {
     console.log('Updated: ', performanceBundle);
@@ -94,8 +94,8 @@ var COUCH_HOST = process.env.COUCH_HOST || 'http://127.0.0.1:5984';
 var HTTP_PORT = 8000;
 var CORS_PORT = 2020;
 
-// if SERVER=sync-gateway we also have 
-// tests/misc/sync-gateway-config-server.js 
+// if SERVER=sync-gateway we also have
+// tests/misc/sync-gateway-config-server.js
 // listening on port 8001
 
 var serversStarted;

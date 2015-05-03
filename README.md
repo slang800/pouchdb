@@ -29,7 +29,7 @@ db.put({
  age: 68
 });
 
-db.changes().on('change', function() {
+db.changes().on('change', function () {
   console.log('Ch-Ch-Changes');
 });
 

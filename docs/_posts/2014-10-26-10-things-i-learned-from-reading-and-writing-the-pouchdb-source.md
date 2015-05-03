@@ -195,7 +195,7 @@ CouchDB is one of the grandaddies of NoSQL databases, so unsurprisingly it influ
 The example given is:
 
 ```js
-function(doc) {
+function (doc) {
   if (doc.type == "post") {
     map([doc._id, 0], doc);
   } else if (doc.type == "comment") {

@@ -11,7 +11,7 @@ The syntax of GQL queries should be familiar to those who have used SQL,
 but the capabilities of GQL are much more limited.
 
 GQL queries are performed by passing a query object to the gql method along with a callback.
-Callbacks are in the node.js idiom of `function(err, data)` Where the first argument will be undefined
+Callbacks are in the node.js idiom of `function (err, data)` Where the first argument will be undefined
 unless there is an error, and further arguments specify the result.
 Note that only identifiers and string literals are case-sensitive.
 
@@ -39,10 +39,10 @@ Although only the query is mandatory, the callback is required to access the que
 Currently no query options are implemented.
 
     var pouchdb;
-    PouchDB('idb://test', function(err, db) {
+    PouchDB('idb://test', function (err, db) {
        pouchdb = db;
       // Use pouchdb to call further functions
-        db.gql({select: "*", where: "type='Fire' and name is not null"}, function(err, result){
+        db.gql({select: "*", where: "type='Fire' and name is not null"}, function (err, result){
             if(!err){
             // Use the results of the query here
             }

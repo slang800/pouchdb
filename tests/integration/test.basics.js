@@ -841,7 +841,7 @@ adapters.forEach(function (adapter) {
     });
 
     it('issue 2779, deleted docs, old revs COUCHDB-292', function (done) {
-      var db =  new PouchDB(dbs.name);
+      var db = new PouchDB(dbs.name);
       var rev;
 
       db.put({_id: 'foo'}).then(function (resp) {
@@ -865,7 +865,7 @@ adapters.forEach(function (adapter) {
         return true;
       }
 
-      var db =  new PouchDB(dbs.name);
+      var db = new PouchDB(dbs.name);
       var rev;
 
       function checkNumRevisions(num) {
@@ -928,7 +928,7 @@ adapters.forEach(function (adapter) {
     it('2 invalid puts', function (done) {
       var db = new PouchDB(dbs.name);
       var called = 0;
-      var cb = function() {
+      var cb = function () {
         if (++called === 2) {
           done();
         }

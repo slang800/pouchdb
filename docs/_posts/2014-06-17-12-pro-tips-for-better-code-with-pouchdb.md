@@ -187,7 +187,7 @@ So if you find yourself writing something like this, you're doing it wrong:
 ```js
 function getPostsSince(when) {
   return db.query({
-    map: function(doc, emit) {
+    map: function (doc, emit) {
       if (doc.timestamp > when) {
         emit(doc.name, 1);
       }
@@ -196,7 +196,7 @@ function getPostsSince(when) {
 }
 function getPostsBefore(when) {
   return db.query({
-    map: function(doc, emit) {
+    map: function (doc, emit) {
       if (doc.timestamp < when) {
         emit(doc.name, 1);
       }
@@ -205,7 +205,7 @@ function getPostsBefore(when) {
 }
 function getPostsBetween(startTime, endTime) {
   return db.query({
-    map: function(doc, emit) {
+    map: function (doc, emit) {
       if (doc.timestamp > startTime && doc.timestamp < endTime) {
         emit(doc.name, 1);
       }
@@ -222,7 +222,7 @@ Since all of these map/reduce functions key off of `doc.timestamp`, a better app
 var ddoc = createDesignDoc('by_timestamp', function (doc) {
   emit(doc.timestamp, doc.name);
 });
-db.put(ddoc).then(function() {/* etc. */});
+db.put(ddoc).then(function () {/* etc. */});
 
 function getPostsSince(when) {
   return db.query('by_timestamp', {endkey: when, descending: true});

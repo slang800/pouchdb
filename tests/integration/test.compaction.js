@@ -19,7 +19,7 @@ adapters.forEach(function (adapter) {
     after(function (done) {
       testUtils.cleanup([dbs.name], done);
     });
-    
+
     it('#3350 compact should return {ok: true}', function (done) {
       var db = new PouchDB(dbs.name);
       db.compact(function (err, result) {
@@ -1446,7 +1446,7 @@ adapters.forEach(function (adapter) {
 
         var updatePromise = PouchDB.utils.Promise.resolve();
 
-        for (var i  = 0; i < 20; i++) {
+        for (var i = 0; i < 20; i++) {
           /* jshint loopfunc: true */
           updatePromise = updatePromise.then(function () {
             return db.put(doc).then(function (res) {
@@ -1485,7 +1485,7 @@ adapters.forEach(function (adapter) {
 
         var updatePromise = PouchDB.utils.Promise.resolve();
 
-        for (var i  = 0; i < 20; i++) {
+        for (var i = 0; i < 20; i++) {
           /* jshint loopfunc: true */
           updatePromise = updatePromise.then(function () {
             return db.put(doc).then(function (res) {
@@ -1524,7 +1524,7 @@ adapters.forEach(function (adapter) {
 
         var updatePromise = PouchDB.utils.Promise.resolve();
 
-        for (var i  = 0; i < 20; i++) {
+        for (var i = 0; i < 20; i++) {
           /* jshint loopfunc: true */
           updatePromise = updatePromise.then(function () {
             return db.put(doc).then(function (res) {

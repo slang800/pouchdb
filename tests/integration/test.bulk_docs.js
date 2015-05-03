@@ -782,7 +782,7 @@ adapters.forEach(function (adapter) {
       });
     });
 
-    it('Bulk docs two different revisions to same document id', function(done) {
+    it('Bulk docs two different revisions to same document id', function (done) {
       var db = new PouchDB(dbs.name);
       var docid = "mydoc";
 
@@ -822,12 +822,12 @@ adapters.forEach(function (adapter) {
       // push the conflicted documents
       return db.bulkDocs([ a_doc, b_doc ], { new_edits: false })
 
-      .then(function() {
-        return db.get(docid, { open_revs: "all" }).then(function(resp) {
+      .then(function () {
+        return db.get(docid, { open_revs: "all" }).then(function (resp) {
           resp.length.should.equal(2, 'correct number of open revisions');
           resp[0].ok._id.should.equal(docid, 'rev 1, correct document id');
           resp[1].ok._id.should.equal(docid, 'rev 2, correct document id');
-          
+
           // order of revisions is not specified
           ((resp[0].ok._rev === a_doc._rev &&
             resp[1].ok._rev === b_doc._rev) ||
@@ -836,7 +836,7 @@ adapters.forEach(function (adapter) {
         });
       })
 
-      .then(function() { done(); }, done);
+      .then(function () { done(); }, done);
     });
 
   });

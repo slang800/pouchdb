@@ -64,15 +64,15 @@ testUtils.readBlob = function (blob, callback) {
   } else {
     var reader = new FileReader();
     reader.onloadend = function (e) {
-      
+
       var binary = "";
       var bytes = new Uint8Array(this.result || '');
       var length = bytes.byteLength;
-      
+
       for (var i = 0; i < length; i++) {
         binary += String.fromCharCode(bytes[i]);
       }
-      
+
       callback(binary);
     };
     reader.readAsArrayBuffer(blob);
@@ -104,8 +104,8 @@ testUtils.cleanup = function (dbs, done) {
   dbs = uniq(dbs);
   var num = dbs.length;
 
-  dbs.forEach(function(db) {
-    new PouchDB(db).destroy(function() {
+  dbs.forEach(function (db) {
+    new PouchDB(db).destroy(function () {
       if (--num === 0) {
         done();
       }

@@ -379,7 +379,7 @@ adapters.forEach(function (adapters) {
           return db.bulkDocs({docs: docs});
         }).then(function () {
           var sync = db.sync(dbs.remote);
-          sync.on('denied', function(error) {
+          sync.on('denied', function (error) {
             deniedErrors.push(error);
           });
           return sync;
@@ -395,7 +395,7 @@ adapters.forEach(function (adapters) {
       });
     });
 
-    it('#3270 triggers "change" events with .docs property', function(done) {
+    it('#3270 triggers "change" events with .docs property', function (done) {
       var syncedDocs = [];
       var db = new PouchDB(dbs.name);
       var docs = [
@@ -405,14 +405,14 @@ adapters.forEach(function (adapters) {
       ];
 
       db.bulkDocs({ docs: docs }, {})
-      .then(function(results) {
+      .then(function (results) {
         var sync = db.sync(dbs.remote);
-        sync.on('change', function(change) {
+        sync.on('change', function (change) {
           syncedDocs = syncedDocs.concat(change.change.docs);
         });
         return sync;
       })
-      .then(function() {
+      .then(function () {
         syncedDocs.sort(function (a, b) {
           return a._id > b._id ? 1 : -1;
         });

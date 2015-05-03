@@ -302,21 +302,21 @@ If you pass a function to `db.query` and give it the `emit` function as the seco
 {% highlight js %}
 // BAD! will throw error
 var myId = 'foo';
-db.query(function(doc) {
+db.query(function (doc) {
   if (doc._id === myId) {
     emit(doc);
   }
-}, function(err, results) {
+}, function (err, results) {
   // you'll get an error here
 });
 
 // will be fine
 var myId = 'foo';
-db.query(function(doc, emit) {
+db.query(function (doc, emit) {
   if (doc._id === myId) {
     emit(doc);
   }
-}, function(err, results) {
+}, function (err, results) {
   if (err) { return console.log(err); }
   // handle result
 });
@@ -326,7 +326,7 @@ db.query(function(doc, emit) {
 {% highlight js %}
 // BAD! will throw error
 var myId = 'foo';
-db.query(function(doc) {
+db.query(function (doc) {
   if (doc._id === myId) {
     emit(doc);
   }
@@ -336,7 +336,7 @@ db.query(function(doc) {
 
 // will be fine
 var myId = 'foo';
-db.query(function(doc, emit) {
+db.query(function (doc, emit) {
   if (doc._id === myId) {
     emit(doc);
   }

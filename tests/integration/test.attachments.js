@@ -1648,7 +1648,7 @@ adapters.forEach(function (adapter) {
       var db = new PouchDB(dbs.name);
       var docs = [];
 
-      for (var i  = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         docs.push({
           _id: 'doc' + i,
           _attachments: {

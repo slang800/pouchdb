@@ -89,7 +89,7 @@ We have included a helper function `redrawTodosUI` that takes an array of todos 
 
 {% highlight js %}
 function showTodos() {
-  db.allDocs({include_docs: true, descending: true}, function(err, doc) {
+  db.allDocs({include_docs: true, descending: true}, function (err, doc) {
     redrawTodosUI(doc.rows);
   });
 }

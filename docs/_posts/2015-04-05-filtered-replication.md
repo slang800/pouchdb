@@ -35,7 +35,7 @@ The first step in implementing your server-side filtering solution is to create 
 {
    "_id": "_design/app",
    "filters": {
-     "by_agent": function(doc, req) {
+     "by_agent": function (doc, req) {
        return doc.agent === req.query.agent;
      }.toString()
    }
@@ -67,7 +67,7 @@ localDB.sync(remoteDB, {
   retry: true,
   filter: 'app/by_agent',
   query_params: { "agent": agent }
-}).on('change', function(result) {
+}).on('change', function (result) {
   if (change.deleted){
     // remove
   } else {
@@ -113,7 +113,7 @@ If you followed this post step-by-step, however, this won't work. Why? To make t
 {
   "_id": "_design/app",
   "filters": {
-    "by_agent": function(doc, req) {
+    "by_agent": function (doc, req) {
       return doc._id === '_design/app' || doc.agent === req.query.agent;
     }.toString()
   }

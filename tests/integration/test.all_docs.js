@@ -52,7 +52,7 @@ adapters.forEach(function (adapter) {
               var ids = ['0', '3', '1', '2'];
               db.changes({
                 complete: function (err, changes) {
-                  // order of changes is not guaranteed in a 
+                  // order of changes is not guaranteed in a
                   // clustered changes feed
                   changes.results.forEach(function (row, i) {
                     ids.should.include(row.id, 'seq order');
@@ -60,7 +60,7 @@ adapters.forEach(function (adapter) {
                   db.changes({
                     descending: true,
                     complete: function (err, changes) {
-                      // again, order is not guaranteed so 
+                      // again, order is not guaranteed so
                       // unsure if this is a useful test
                       ids = ['2', '1', '3', '0'];
                       changes.results.forEach(function (row, i) {
@@ -134,7 +134,7 @@ adapters.forEach(function (adapter) {
 
       db.info(function (err, info) {
         var update_seq = info.update_seq;
-        
+
         testUtils.writeDocs(db, JSON.parse(JSON.stringify(origDocs)),
           function () {
           db.get('1', function (err, doc) {
@@ -163,8 +163,8 @@ adapters.forEach(function (adapter) {
 
       db.info(function (err, info) {
         var update_seq = info.update_seq;
-        
-        testUtils.writeDocs(db, JSON.parse(JSON.stringify(origDocs)), 
+
+        testUtils.writeDocs(db, JSON.parse(JSON.stringify(origDocs)),
           function () {
           db.get('3', function (err, doc) {
             doc.updated = 'totally';
@@ -196,7 +196,7 @@ adapters.forEach(function (adapter) {
                 row.doc.a.should.equal(1);
               }
             });
-            
+
             done();
           }
         });
@@ -235,7 +235,7 @@ adapters.forEach(function (adapter) {
                   var result = changes.results.filter(function (row, i) {
                     return row.id === '3';
                   })[0];
-                  
+
                   result.changes.should.have
                     .length(3, 'correct number of changes');
                   result.doc._rev.should.equal(conflictDoc2._rev);
@@ -316,92 +316,92 @@ adapters.forEach(function (adapter) {
         }).then(function () {
           return db.allDocs();
         }).then(function (res) {
-          res.rows.should.have.length(8,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(8, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5'});
         }).then(function (res) {
-          res.rows.should.have.length(4,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(4, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', skip : 2, limit : 10});
         }).then(function (res) {
-          res.rows.should.have.length(2,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(2, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', limit : 0});
         }).then(function (res) {
           res.rows.should.have
-            .length(0,  'correctly return rows, startkey w/ limit=0');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+            .length(0, 'correctly return rows, startkey w/ limit=0');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({keys : ['5'], limit : 0});
         }).then(function (res) {
           res.rows.should.have
-            .length(0,  'correctly return rows, keys w/ limit=0');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+            .length(0, 'correctly return rows, keys w/ limit=0');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({limit : 0});
         }).then(function (res) {
-          res.rows.should.have.length(0,  'correctly return rows, limit=0');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(0, 'correctly return rows, limit=0');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', descending : true, skip : 1});
         }).then(function (res) {
-          res.rows.should.have.length(4,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(4, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', endkey : 'z'});
         }).then(function (res) {
-          res.rows.should.have.length(4,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(4, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', endkey : '5'});
         }).then(function (res) {
-          res.rows.should.have.length(1,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(1, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', endkey : '4'});
         }).then(function (res) {
-          res.rows.should.have.length(0,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(0, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '5', endkey : '4', descending : true});
         }).then(function (res) {
-          res.rows.should.have.length(2,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(2, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '3', endkey : '7', descending : false});
         }).then(function (res) {
-          res.rows.should.have.length(3,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(3, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '7', endkey : '3', descending : true});
         }).then(function (res) {
-          res.rows.should.have.length(3,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(3, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({startkey : '', endkey : '0'});
         }).then(function (res) {
-          res.rows.should.have.length(1,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(1, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({keys : ['0', '1', '3']});
         }).then(function (res) {
-          res.rows.should.have.length(3,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(3, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({keys : ['0', '1', '0', '2', '1', '1']});
         }).then(function (res) {
-          res.rows.should.have.length(6,  'correctly return rows');
+          res.rows.should.have.length(6, 'correctly return rows');
           res.rows.map(function (row) { return row.key; }).should.deep.equal(
             ['0', '1', '0', '2', '1', '1']);
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({keys : []});
         }).then(function (res) {
-          res.rows.should.have.length(0,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(0, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({keys : ['7']});
         }).then(function (res) {
-          res.rows.should.have.length(1,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(1, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({key : '3'});
         }).then(function (res) {
-          res.rows.should.have.length(0,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(0, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({key : '2'});
         }).then(function (res) {
-          res.rows.should.have.length(1,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(1, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           return db.allDocs({key : 'z'});
         }).then(function (res) {
-          res.rows.should.have.length(0,  'correctly return rows');
-          res.total_rows.should.equal(8,  'correctly return total_rows');
+          res.rows.should.have.length(0, 'correctly return rows');
+          res.total_rows.should.equal(8, 'correctly return total_rows');
           done();
         }, done);
 
@@ -419,8 +419,8 @@ adapters.forEach(function (adapter) {
       };
       db.bulkDocs(docs, function (err, res) {
         db.allDocs({ startkey: 'x', limit: 1, skip : 1}, function (err, res) {
-          res.total_rows.should.equal(4,  'Accurately return total_rows count');
-          res.rows.should.have.length(1,  'Correctly limit the returned rows');
+          res.total_rows.should.equal(4, 'Accurately return total_rows count');
+          res.rows.should.have.length(1, 'Correctly limit the returned rows');
           res.rows[0].id.should.equal('y', 'Correctly skip 1 doc');
 
           db.get('x', function (err, xDoc) {
@@ -428,9 +428,9 @@ adapters.forEach(function (adapter) {
               db.allDocs({ startkey: 'w', limit: 2, skip : 1},
                 function (err, res) {
                 res.total_rows.should
-                  .equal(3,  'Accurately return total_rows count after delete');
+                  .equal(3, 'Accurately return total_rows count after delete');
                 res.rows.should.have
-                  .length(2,  'Correctly limit the returned rows after delete');
+                  .length(2, 'Correctly limit the returned rows after delete');
                 res.rows[0].id.should
                   .equal('y', 'Correctly skip 1 doc after delete');
                 done();

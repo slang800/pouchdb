@@ -26,7 +26,7 @@ function truncate(string, length) {
 utils.toPromise = function (func, passPromise) {
   var fn = _toPromise(func, passPromise);
 
-  var patchedFn =  function () {
+  var patchedFn = function () {
     var args = Array.prototype.slice.call(arguments);
     var promise = fn.apply(this, args);
 

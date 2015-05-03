@@ -80,10 +80,10 @@ cd $TESTS_DIR
 CORDOVA=../../../node_modules/cordova/bin/cordova
 
 $CORDOVA platform add $CLIENT
-if [[ $($CORDOVA plugin list | grep sqlite) ]]; then 
+if [[ $($CORDOVA plugin list | grep sqlite) ]]; then
   $CORDOVA plugin rm com.phonegap.plugins.sqlite
 fi
-if [[ $SQLITE_PLUGIN == 'true' ]]; then 
+if [[ $SQLITE_PLUGIN == 'true' ]]; then
   $CORDOVA plugin add https://github.com/brodysoft/Cordova-SQLitePlugin
 fi
 $CORDOVA $ACTION $CLIENT

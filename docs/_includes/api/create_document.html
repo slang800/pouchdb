@@ -18,7 +18,7 @@ Create a new doc with an `_id` of `'mydoc'`:
 db.put({
   _id: 'mydoc',
   title: 'Heroes'
-}, function(err, response) {
+}, function (err, response) {
   if (err) { return console.log(err); }
   // handle response
 });
@@ -42,13 +42,13 @@ You can update an existing doc using `_rev`:
 
 {% include code/start.html id="updateDoc" type="callback" %}
 {% highlight js %}
-db.get('mydoc', function(err, doc) {
+db.get('mydoc', function (err, doc) {
   if (err) { return console.log(err); }
   db.put({
     _id: 'mydoc',
     _rev: doc._rev,
     title: "Let's Dance"
-  }, function(err, response) {
+  }, function (err, response) {
     if (err) { return console.log(err); }
     // handle response
   });
@@ -58,13 +58,13 @@ db.get('mydoc', function(err, doc) {
 
 {% include code/start.html id="updateDoc" type="promise" %}
 {% highlight js %}
-db.get('mydoc').then(function(doc) {
+db.get('mydoc').then(function (doc) {
   return db.put({
     _id: 'mydoc',
     _rev: doc._rev,
     title: "Let's Dance"
   });
-}).then(function(response) {
+}).then(function (response) {
   // handle response
 }).catch(function (err) {
   console.log(err);
@@ -77,11 +77,11 @@ also pass them in as options:
 
 {% include code/start.html id="updateDoc2" type="callback" %}
 {% highlight js %}
-db.get('mydoc', function(err, doc) {
+db.get('mydoc', function (err, doc) {
   if (err) { return console.log(err); }
   db.put({
     title: "Sound and Vision"
-  }, 'mydoc', doc._rev, function(err, response) {
+  }, 'mydoc', doc._rev, function (err, response) {
     if (err) { return console.log(err); }
     // handle response
   });
@@ -91,11 +91,11 @@ db.get('mydoc', function(err, doc) {
 
 {% include code/start.html id="updateDoc2" type="promise" %}
 {% highlight js %}
-db.get('mydoc').then(function(doc) {
+db.get('mydoc').then(function (doc) {
   return db.put({
     title: "Sound and Vision"
   }, 'mydoc', doc._rev,);
-}).then(function(response) {
+}).then(function (response) {
   // handle response
 }).catch(function (err) {
   console.log(err);
